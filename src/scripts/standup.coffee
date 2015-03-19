@@ -42,9 +42,9 @@ module.exports = (robot) ->
       msg.send "Ok, let's start the standup: #{who}"
       nextPerson robot, room, msg
     else
-      msg.send "Oops, can't find anyone with 'a #{group} member' role!"
+      msg.send "Oops, can't find anyone with 'a member of #{group}' role!"
 
-  robot.respond /(?:that\'s it|next(?: person)?|done) *$/i, (msg) ->
+  robot.respond /(?:that\'s it|next|done) *$/i, (msg) ->
     unless robot.brain.data.standup?[msg.message.user.room]
       return
     if robot.brain.data.standup[msg.message.user.room].current.id isnt msg.message.user.id
@@ -52,7 +52,7 @@ module.exports = (robot) ->
     else
       nextPerson robot, msg.message.user.room, msg
 
-  robot.hear /^\s*(?:that\'?s\s+it|next\s+(?:person|one)?|done|(Я|у\s+меня|вроде)\s+вс[её])([.!]*) *$/i, (msg) ->
+  robot.hear /^\s*(?:that\'?s\s+(it|all)|next\s+(?:person|one)?|done|(ну(\s+и)?)?(\s+(Я|у\s+меня))?(\s+вроде(\s+(как|бы))?)?\s+вс[её](\s+вроде(\s+(как|бы))?)?)((\s*:[\w-+]:)|[.!:=()])* *$/i, (msg) ->
     unless robot.brain.data.standup?[msg.message.user.room]
       return
     if robot.brain.data.standup[msg.message.user.room].current.id is msg.message.user.id

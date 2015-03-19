@@ -2,7 +2,7 @@
 #   Agile standup bot ala tender
 #
 # Commands:
-#   hubot standup? - show help for the standup
+#   hubot standup help - show help for the standup
 #   hubot <who> is a member of <team> - tell hubot who is the member of <team>'s standup
 #   hubot standup [for <team>] - start the standup for <team>
 #   hubot cancel standup - cancel the current standup
@@ -84,7 +84,7 @@ module.exports = (robot) ->
     else
       msg.send "#{msg.match[2]}? Never heard of 'em"
 
-  robot.respond /standup\?? *$/i, (msg) ->
+  robot.respond /standup\s+help\s*$/i, (msg) ->
     msg.send """
              <who> is a member of <team> - tell hubot who is the member of <team>'s standup
              standup [for <team>] - start the standup for <team>

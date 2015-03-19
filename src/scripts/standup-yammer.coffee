@@ -38,6 +38,9 @@ module.exports = (robot) ->
 querystring = require 'querystring'
 
 postYammer = (robot, group, room, response, logs) ->
+  unless process.env.HUBOT_STANDUP_YAMMER_TOKEN
+    return
+
   group_id = getYammerGroup robot, group
   if group_id is undefined
     response.send "Tell me which Yammer group to post archives. Say 'hubot post #{group} standup logs to <GROUP_ID>'. Use Group ID 0 if you don't need archives."

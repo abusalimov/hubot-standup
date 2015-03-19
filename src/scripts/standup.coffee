@@ -19,7 +19,7 @@ module.exports = (robot) ->
 
   robot.respond /standup\b((\s+for)?\s+(.*))? *$/i, (msg) ->
     room  = msg.message.user.room
-    group = msg.match[2].trim() or 'all'
+    group = (msg.match[2] or 'all').trim()
     if robot.brain.data.standup?[room]
       msg.send "The standup for #{robot.brain.data.standup[room].group} is in progress! Cancel it first with 'cancel standup'"
       return

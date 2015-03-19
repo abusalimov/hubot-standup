@@ -35,7 +35,7 @@ module.exports = (robot) ->
         group: group,
         start: new Date().getTime(),
         attendees: attendees,
-        remaining: shuffleArrayClone(attendees)
+        remaining: attendees,
         log: [],
       }
       who = attendees.map((user) -> user.name).join(', ')
@@ -91,12 +91,6 @@ module.exports = (robot) ->
     unless robot.brain.data.standup?[msg.message.user.room]
       return
     robot.brain.data.standup[msg.message.user.room].log.push { message: msg.message, time: new Date().getTime() }
-
-shuffleArrayClone = (array) ->
-  cloned = []
-  for i in (array.sort -> 0.5 - Math.random())
-    cloned.push i
-  cloned
 
 nextPerson = (robot, room, msg) ->
   standup = robot.brain.data.standup[room]

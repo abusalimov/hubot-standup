@@ -53,6 +53,9 @@ module.exports = (robot) ->
       nextPerson robot, msg.message.user.room, msg
 
   robot.hear /^\s*(?:that\'?s\s+it|next\s+(?:person|one)?|done|(Я|у\s+меня|вроде)\s+вс[её])([.!]*) *$/i, (msg) ->
+    unless robot.brain.data.standup?[msg.message.user.room]
+      return
+    if robot.brain.data.standup[msg.message.user.room].current.id is msg.message.user.id
       nextPerson robot, msg.message.user.room, msg
 
   robot.respond /(skip|next) (.*) *$/i, (msg) ->

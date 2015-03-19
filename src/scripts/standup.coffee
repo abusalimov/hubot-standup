@@ -4,10 +4,10 @@
 # Commands:
 #   hubot standup? - show help for the standup
 #   hubot <who> is a member of <team> - tell hubot who is the member of <team>'s standup
-#   hubot standup for <team> - start the standup for <team>
+#   hubot standup [for <team>] - start the standup for <team>
 #   hubot cancel standup - cancel the current standup
-#   hubot next - say when your updates for the standup is done
 #   hubot skip <who> - skip someone when they're not available
+#  [hubot] next - say when your updates for the standup is done
 #
 # Author:
 #   @miyagawa
@@ -87,10 +87,10 @@ module.exports = (robot) ->
   robot.respond /standup\?? *$/i, (msg) ->
     msg.send """
              <who> is a member of <team> - tell hubot who is the member of <team>'s standup
-             standup for <team> - start the standup for <team>
+             standup [for <team>] - start the standup for <team>
              cancel standup - cancel the current standup
-             next - say when your updates for the standup is done
              skip <who> - skip someone when they're not available
+             next - say when your updates for the standup is done
              """
 
   robot.catchAll (msg) ->

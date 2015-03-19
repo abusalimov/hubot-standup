@@ -17,9 +17,9 @@ module.exports = (robot) ->
     delete robot.brain.data.standup?[msg.message.user.room]
     msg.send "Standup cancelled"
 
-  robot.respond /standup\b( for (.*))? *$/i, (msg) ->
+  robot.respond /standup\b((\s+for)?\s+(.*))? *$/i, (msg) ->
     room  = msg.message.user.room
-    group = msg.match[2].trim() or 'devs'
+    group = msg.match[2].trim() or 'all'
     if robot.brain.data.standup?[room]
       msg.send "The standup for #{robot.brain.data.standup[room].group} is in progress! Cancel it first with 'cancel standup'"
       return

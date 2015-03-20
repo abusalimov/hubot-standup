@@ -52,7 +52,12 @@ module.exports = (robot) ->
     else
       nextPerson robot, msg.message.user.room, msg
 
-  robot.hear /^\s*(?:that\'?s\s+(it|all)|next\s+(?:person|one)?|done|(ну(\s+и)?)?(\s+(Я|у\s+меня))?(\s+вроде(\s+(как|бы))?)?\s+вс[её](\s+вроде(\s+(как|бы))?)?)((\s*:[\w-+]:)|[.!:=()])* *$/i, (msg) ->
+  robot.hear ///^ \s*
+      (?: that\'?s \s+ (it|all) | next \s+ (person|one)? | done
+        | (?= .*\b(вс[её]|дальше|следую?щий)\b)
+          ([,.\s]|\b(ну|и|видимо|Я|у\s+меня|вроде|как|бы|наверное|вс[её]|дальше|следую?щий)\b)* )
+        ((\s*:[\w-+]:)|[.!:=()])*
+      \s* $///i, (msg) ->
     unless robot.brain.data.standup?[msg.message.user.room]
       return
     if robot.brain.data.standup[msg.message.user.room].current.id is msg.message.user.id

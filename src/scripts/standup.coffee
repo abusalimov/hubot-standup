@@ -52,10 +52,12 @@ module.exports = (robot) ->
     else
       nextPerson robot, msg.message.user.room, msg
 
-  robot.hear ///^ \s*
+  robot.hear ///(^|\n|[.!:=()?]) \s*
       (?: that\'?s \s+ (it|all) | next \s+ (person|one)? | done
         | (?= .*(вс[её]|дальше|следую?щий))
-          ([,.\s]|(ну|и|видимо|Я|у\s+меня|вроде|как|бы|наверное|вс[её]|дальше|следую?щий))* )
+          ([,.\s]|(ну|да|и|видимо|Я|у\s+меня|вроде|как|бы
+            |наверное|пока|в\s*оо?бщем|это|на\s+этом
+            |вс[её]|дальше|следую?щий))* )
         ((\s*:[\w-+]:)|[.!:=()])*
       \s* $///i, (msg) ->
     unless robot.brain.data.standup?[msg.message.user.room]

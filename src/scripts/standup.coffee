@@ -30,6 +30,7 @@ module.exports = (robot) ->
       if "a #{group} member" in roles or "an #{group} member" in roles or "a member of #{group}" in roles
         attendees.push user
     if attendees.length > 0
+      attendees.sort()
       robot.brain.data.standup or= {}
       robot.brain.data.standup[room] = {
         group: group,
